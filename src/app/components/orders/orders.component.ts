@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/models/orders';
-import { OrdersService } from 'src/app/services/orders.service';
+import { OrdersService } from 'src/app/services/orders/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,7 +16,9 @@ export class OrdersComponent implements OnInit {
   public totalCost: number = 0;
   public tempTotalCost: number = 0;
 
-  constructor(private orderService: OrdersService) { }
+  constructor(
+    private orderService: OrdersService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders(1);
@@ -59,5 +62,10 @@ export class OrdersComponent implements OnInit {
     }
   }
 
+  public checkout() {
+    this.orderService.setOrderCheckoutItems(this.tempOrders);
+    // this.orderService.setTotalCost
+    this.router.navigate(['/checkout']);
+  }
 
 }
