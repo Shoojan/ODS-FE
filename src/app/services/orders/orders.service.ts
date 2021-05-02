@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Order } from '../../models/orders';
+import { CheckoutCart } from 'src/app/models/CheckoutCart';
 
 @Injectable({
   providedIn: 'root'
@@ -51,11 +52,15 @@ export class OrdersService {
   //   return this.http.post<Order>(`${this.apiServerUrl}/Orders`, Order)
   // }
 
-  // public updateOrders(Order: Order): Observable<Order> {
-  //   return this.http.put<Order>(`${this.apiServerUrl}/Orders`, Order)
-  // }
+  public updateOrders(order: Order): Observable<Order> {
+    return this.http.put<Order>(`${this.apiServerUrl}/orders`, order);
+  }
 
-  // public deleteOrders(id: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiServerUrl}/Orders/${id}`)
-  // }
+  public deleteOrders(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/orders/${id}`);
+  }
+
+  public checkoutOrders(checkoutCart: any): Observable<CheckoutCart> {
+    return this.http.post<CheckoutCart>(`${this.apiServerUrl}/orders/checkout`, checkoutCart);
+  }
 }

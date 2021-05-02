@@ -9,8 +9,7 @@ body {
     padding-top: 5px;
 }
 
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
+.form-signin .form-signin-heading, .form-signin .checkbox {
     margin-bottom: 10px;
 }
 

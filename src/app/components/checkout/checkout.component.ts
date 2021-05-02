@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Card } from 'src/app/models/card';
+import { CheckoutCart } from 'src/app/models/CheckoutCart';
 import { Order } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 
@@ -17,6 +18,8 @@ export class CheckoutComponent implements OnInit {
   public cardDetails: Card = <Card>{};
 
   public formGroup: FormGroup;
+
+  private paymentTypes = { delivery: "CASH_ON_DELIVERY", card: "VISA_CARD_PAYMENT" };
 
   constructor(
     private orderService: OrdersService,
@@ -52,5 +55,20 @@ export class CheckoutComponent implements OnInit {
 
   public makePayment() {
     console.log(this.formGroup.value)
+    //Assuming that the card payment is successful, updating the database only.
+    let checkoutCart = {
+      customerId: 1,
+      orders: this.orders,
+      paymentType: this.paymentTypes.card,
+      deliveryAddress: 'Satungal',
+      totalCost: this.totalCost,
+      orderDate: new Date()
+    }
+    this.orderService.checkoutOrders(checkoutCart).subscribe((res: CheckoutCart) => {
+      if (res) {
+        console.log(res);
+        alert('Thank you for your payment. The orders have been placed!')
+      }
+    });
   }
 }

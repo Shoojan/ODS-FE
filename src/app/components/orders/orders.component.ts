@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { Order } from 'src/app/models/orders';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 
@@ -44,7 +45,13 @@ export class OrdersComponent implements OnInit {
         order.quantity = event.target.value;
         const previousTotalCost = order.totalPrice;
         order.totalPrice = order.quantity * order.unitPrice;
-        this.tempTotalCost = this.tempTotalCost - previousTotalCost + order.totalPrice;
+
+        //update database as well
+        this.orderService.updateOrders(order).subscribe((res: Order) => {
+          if (res) {
+            this.tempTotalCost = this.tempTotalCost - previousTotalCost + order.totalPrice;
+          }
+        });
       }
     })
   }
@@ -58,13 +65,15 @@ export class OrdersComponent implements OnInit {
           this.tempOrders.splice(index, 1);
           this.tempTotalCost = this.tempTotalCost - order.totalPrice;
         }
+        //remove deleted orders from database as well
+        this.orderService.deleteOrders(order.id);
       }
     }
   }
 
   public checkout() {
     this.orderService.setOrderCheckoutItems(this.tempOrders);
-    // this.orderService.setTotalCost
+
     this.router.navigate(['/checkout']);
   }
 
