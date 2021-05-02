@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-sm-6 text-right">
                             <small>
-                                <strong>Name:</strong> {{cardDetails.name}}
+                                <strong>Name:</strong> {{cardDetails.cardName}}
                             </small>
                         </div>
                     </div>
@@ -65,15 +65,16 @@
                                             </div>
                                             <div class="col-md-8">
 
-                                                <form role="form" id="payment-form">
+                                                <form role="form" id="payment-form" [formGroup]="formGroup"
+                                                    (submit)="makePayment()">
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <div class="form-group">
                                                                 <label>CARD NUMBER</label>
                                                                 <div class="input-group">
                                                                     <input type="text" class="form-control"
-                                                                        name="Number" placeholder="Valid Card Number"
-                                                                        required="">
+                                                                        formControlName="cardNumber" name="Number"
+                                                                        placeholder="Valid Card Number">
                                                                     <span class="input-group-addon"><i
                                                                             class="fa fa-credit-card"></i></span>
                                                                 </div>
@@ -84,15 +85,17 @@
                                                         <div class="col-xs-7 col-md-7">
                                                             <div class="form-group">
                                                                 <label>EXPIRATION DATE</label>
-                                                                <input type="text" class="form-control" name="Expiry"
-                                                                    placeholder="MM / YY" required="">
+                                                                <input type="text" class="form-control"
+                                                                    formControlName="expirationDate" name="Expiry"
+                                                                    placeholder="MM / YY">
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-5 col-md-5 pull-right">
                                                             <div class="form-group">
                                                                 <label>CV CODE</label>
-                                                                <input type="text" class="form-control" name="CVC"
-                                                                    placeholder="CVC" required="">
+                                                                <input type="text" class="form-control"
+                                                                    formControlName="cvCode" name="CVC"
+                                                                    placeholder="CVC">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -100,7 +103,8 @@
                                                         <div class="col-xs-12">
                                                             <div class="form-group">
                                                                 <label>NAME OF CARD</label>
-                                                                <input type="text" class="form-control" name="nameCard"
+                                                                <input type="text" class="form-control"
+                                                                    formControlName="cardName" name="nameCard"
                                                                     placeholder="NAME AND SURNAME">
                                                             </div>
                                                         </div>

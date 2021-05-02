@@ -1,5 +1,5 @@
 export interface Card {
-    name: string;
+    cardName: string;
     cardNumber: string;
     cvCode: number;
     expirationDate: string;
