@@ -36,6 +36,7 @@ export class OrdersService {
 
 
   //----------------------------- Methods ----------------------------- 
+  public getCustomerDetails() { return this.authService.getLoginData(); }
 
 
   //----------------------------- API Endpoints Call ----------------------------- 

@@ -43,12 +43,20 @@ export class AuthService {
     return this.getLoginDataByKey("firstName") + " " + this.getLoginDataByKey("lastName");
   }
 
-  getLoginDataByKey(key: string) {
+  getLoginData() {
     let loginData = localStorage.getItem("login_data");
     if (loginData) {
       let data = JSON.parse(loginData);
-      if (data.hasOwnProperty(key))
-        return data[key];
+      return data;
+    }
+    return null;
+  }
+
+  getLoginDataByKey(key: string) {
+    let loginData = this.getLoginData();
+    if (loginData) {
+      if (loginData.hasOwnProperty(key))
+        return loginData[key];
     }
     return null;
   }
@@ -80,12 +88,7 @@ export class AuthService {
 
 
   isLogin() {
-    try {
-      console.log("login token ", this.getLoginToken());
-      return !!this.getLoginToken();
-    } catch (e) {
-    }
-    return false;
+    return !!this.getLoginToken();
   }
 
   public logoutUser() {

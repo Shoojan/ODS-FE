@@ -43,8 +43,8 @@
                                         <i class="fa fa-truck text-success"></i>
                                     </div>
                                     <h5 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Delivery
-                                            Information</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                            Delivery Information</a>
                                     </h5>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse">
@@ -57,17 +57,22 @@
                                                     <tr>
                                                         <td><strong>Full Name</strong></td>
                                                         <td>:</td>
-                                                        <td>Sujan Maharjan</td>
+                                                        <td>{{customerDetails.fullName}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Email</strong></td>
                                                         <td>:</td>
-                                                        <td>sujan@gmail.com</td>
+                                                        <td>{{customerDetails.email}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Phone</strong></td>
+                                                        <td>:</td>
+                                                        <td>{{customerDetails.mobile}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Address:</strong></td>
                                                         <td>:</td>
-                                                        <td>Satungal</td>
+                                                        <td>{{customerDetails.address}}</td>
                                                     </tr>
                                                 </table>
                                             </div>

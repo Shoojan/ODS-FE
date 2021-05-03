@@ -21,6 +21,7 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+            <strong class="navbar-brand"> {{_authService.getLoginDataByKey("fullName")}}</strong>
             <a class="nav-link" *ngIf="!_authService.isLogin()" routerLink="/login" routerLinkActive="active">Login</a>
             <a class="nav-link" style="cursor:pointer" *ngIf="_authService.isLogin()"
                 (click)="_authService.logoutUser()">Logout</a>

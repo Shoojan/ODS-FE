@@ -16,6 +16,7 @@ export class CheckoutComponent implements OnInit {
   public totalCost: number = 0;
 
   public cardDetails: Card = <Card>{};
+  public customerDetails: any;
 
   public formGroup: FormGroup;
 
@@ -47,6 +48,8 @@ export class CheckoutComponent implements OnInit {
         this.orders = data;
       })
     this.totalCost = this.orderService.getTotalCost();
+    this.customerDetails = this.orderService.getCustomerDetails();
+    console.log(this.customerDetails)
   }
 
   public populateCardDetails() {
@@ -57,10 +60,10 @@ export class CheckoutComponent implements OnInit {
     console.log(this.formGroup.value)
     //Assuming that the card payment is successful, updating the database only.
     let checkoutCart = {
-      customerId: 1,
+      customerId: this.customerDetails.customerId,
       orders: this.orders,
       paymentType: this.paymentTypes.card,
-      deliveryAddress: 'Satungal',
+      deliveryAddress: this.customerDetails.address,
       totalCost: this.totalCost,
       orderDate: new Date()
     }
