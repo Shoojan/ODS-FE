@@ -6,6 +6,7 @@ export interface CheckoutCart {
     orders: Order[];
     paymentType: string;
     deliveryAddress: string;
-    totalCost: number;
+    totalPayment: number;
     orderDate: Date;
+    expectedDate: Date;
 }

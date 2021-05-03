@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
 import { CheckoutCart } from 'src/app/models/CheckoutCart';
 import { Order } from 'src/app/models/orders';
@@ -24,7 +25,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private orderService: OrdersService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
 
     this.cardDetails = {
@@ -57,21 +59,23 @@ export class CheckoutComponent implements OnInit {
   }
 
   public makePayment() {
-    console.log(this.formGroup.value)
+    // console.log(this.formGroup.value)
     //Assuming that the card payment is successful, updating the database only.
-    let checkoutCart = {
-      customerId: this.customerDetails.customerId,
-      orders: this.orders,
-      paymentType: this.paymentTypes.card,
-      deliveryAddress: this.customerDetails.address,
-      totalCost: this.totalCost,
-      orderDate: new Date()
-    }
-    this.orderService.checkoutOrders(checkoutCart).subscribe((res: CheckoutCart) => {
-      if (res) {
-        console.log(res);
-        alert('Thank you for your payment. The orders have been placed!')
+    if (confirm(`The orders have been placed!\nRs. ${this.totalCost} shall be deducted from your account. \nAre you sure?`)) {
+      let checkoutCart = {
+        customerId: this.customerDetails.customerId,
+        orders: this.orders,
+        paymentType: this.paymentTypes.card,
+        deliveryAddress: this.customerDetails.address,
+        totalPayment: this.totalCost,
+        orderDate: new Date()
       }
-    });
+      this.orderService.checkoutOrders(checkoutCart).subscribe((res: CheckoutCart) => {
+        if (res) {
+          alert(`Thank you for your payment.\nRs. ${res.totalPayment} has been deducted from your account. `)
+          this.router.navigateByUrl("/dashboard");
+        }
+      });
+    }
   }
 }

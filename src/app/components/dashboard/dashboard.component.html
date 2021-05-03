@@ -1,18 +1,20 @@
 <hr>
+<h1>Orders Pending</h1>
 <hr>
 <div class="container">
     <div class="row">
-        <div *ngIf="orders.length" class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-6">
             <div class="card bg-c-blue order-card" (click)="goToOrders()">
                 <div class="card-block">
-                    <h4 class="m-b-20">Orders</h4>
-                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{orders.length}}</span></h2>
+                    <h4 class="m-b-20">Orders in Cart</h4>
+                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{activeOrders.length}}</span>
+                    </h2>
                     <p class="m-b-0">Total Cost<span class="f-right">{{totalCost | currency:'Rs. '}}</span></p>
                 </div>
             </div>
         </div>
 
-        <div *ngIf="checkoutCartOrder.id" class="col-md-6 col-xl-6">
+        <!-- <div class="col-md-6 col-xl-6">
             <div class="card bg-c-green order-card">
                 <div class="card-block">
                     <h4 class="m-b-20">Orders Checked-Out</h4>
@@ -32,8 +34,6 @@
                             <div class="col-md-4 col-xl-1">{{order.quantity}}</div>
                             <div class="col-md-4 col-xl-4">{{order.orderStatus}}</div>
                         </div>
-                        <!-- <p class="m-b-0">{{order.product.productName}}<span class="f-right">{{order.quantity}}</span>
-                        </p> -->
                     </div>
                     <hr>
                     <p class="m-b-0">
@@ -48,16 +48,19 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <!-- <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-6">
             <div class="card bg-c-pink order-card">
                 <div class="card-block">
                     <h4 class="m-b-20">Orders Canceled</h4>
-                    <h2 class="text-right"><i class="fa fa-frown-o f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                    <h2 class="text-right"><i class="fa fa-frown-o f-left"></i><span>{{deletedOrders.length}}</span>
+                    </h2>
+                    <p class="m-b-0">Last Deleted At<span class="f-right">{{lastDeletedAt ? lastDeletedAt : 'NA'}}</span></p>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
+<app-order-track></app-order-track>
+<br><br><br>

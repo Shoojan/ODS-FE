@@ -43,7 +43,13 @@ export class OrdersService {
 
   public getOrders(customerId: number): Observable<Order[]> {
     // return this.http.get<Order[]>(`${this.apiServerUrl}/orders?customerId=${customerId}`)
-    return this.authService.getAllData(`/orders?customerId=${customerId}&orderStatus='ADDED_TO_CART'`);
+    return this.authService.getAllData(`/orders?customerId=${customerId}&isActive=1`);
+  }
+
+
+  public getDeletedOrders(customerId: number): Observable<Order[]> {
+    // return this.http.get<Order[]>(`${this.apiServerUrl}/orders?customerId=${customerId}`)
+    return this.authService.getAllData(`/orders?customerId=${customerId}&isActive=0`);
   }
 
   // public getOrder(id: number): Observable<Order> {

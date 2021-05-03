@@ -11,17 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  currentYear = new Date().getFullYear();
-  submitted = false;
-  loading = false;
-  errorMessage = '';
-  returnUrl = '/orders';
-
   public formGroup: FormGroup;
 
   public isLogin = false;
   public welcomeUsername = "";
 
+  private returnUrl = '/dashboard';
   private tokenRequestTerm = "jwtToken";
 
   public decodedToken: any;
@@ -38,7 +33,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.formGroup = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: ["sujan@gmail.com", [Validators.required, Validators.email]],
       password: [null, Validators.required]
     })
 

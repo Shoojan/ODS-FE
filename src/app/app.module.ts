@@ -13,6 +13,9 @@ import { OrdersService } from './services/orders/orders.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { ToeknInterceptorService } from './services/token-interceptor/toekn-interceptor.service';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavComponent } from './components/nav/nav.component';
+import { OrderTrackComponent } from './components/order-track/order-track.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { ToeknInterceptorService } from './services/token-interceptor/toekn-inte
     OrdersComponent,
     CheckoutComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    FooterComponent,
+    NavComponent,
+    OrderTrackComponent
   ],
   imports: [
     BrowserModule,

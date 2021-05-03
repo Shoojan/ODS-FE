@@ -9,4 +9,5 @@ export interface Order {
     totalPrice: number;
     orderedAt: Date;
     orderStatus: string;
+    deletedAt: Date;
 }

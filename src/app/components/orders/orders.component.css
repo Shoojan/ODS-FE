@@ -2,6 +2,9 @@ body{
     margin-top:20px;
     background:#eee;
 }
+.f-right {
+  float: right;
+}
 .product-card {
   position: relative;
   max-width: 380px;
