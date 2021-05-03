@@ -60,13 +60,18 @@ export class OrdersComponent implements OnInit {
     if (confirm("Are you sure you want to remove?")) {
       const order = this.tempOrders.find(x => x.id == orderId);
       if (order) {
-        const index = this.tempOrders.indexOf(order);
-        if (index > -1) {
-          this.tempOrders.splice(index, 1);
-          this.tempTotalCost = this.tempTotalCost - order.totalPrice;
-        }
+
         //remove deleted orders from database as well
-        this.orderService.deleteOrders(order.id);
+        this.orderService.deleteOrders(order.id).subscribe((res: any) => {
+          const index = this.tempOrders.indexOf(order);
+          if (index > -1) {
+            this.tempOrders.splice(index, 1);
+            this.tempTotalCost = this.tempTotalCost - order.totalPrice;
+          }
+        }, (err) => {
+          console.log(err)
+          alert(err.message);
+        });
       }
     }
   }

@@ -3,11 +3,15 @@
         <img class="profile-img" src="/assets/avatar_user.png" alt="">
         <!-- <p class="profile-name">User 123</p> -->
         <!-- <span class="profile-email">a@gmail.com</span> -->
-        <form class="form-signin" action="/orders" method="post">
-            <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" required autofocus>
-            <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password" required
+        <form class="form-signin" [formGroup]="formGroup">
+            <input type="text" formControlName="email" class="form-control" placeholder="Email" required autofocus>
+            <!-- <div *ngIf="formGroup.get('email').errors">
+                <div *ngIf="formGroup.get('email').errors.required">Email is required</div>
+            </div> -->
+            <input type="password" formControlName="password" class="form-control" placeholder="Password" required
                 autofocus>
-            <button (click)="loginUserCheck()" class="btn btn-lg btn-primary btn-block" type="submit">
+            <button (click)="loginUserCheck()" class="btn btn-lg btn-primary btn-block" [disabled]="formGroup.invalid"
+                type="submit">
                 Sign in</button>
         </form>
     </div>

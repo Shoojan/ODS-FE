@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   returnUrl = '/orders';
 
-  public email = "a@gmail.com";
-  public password = "a123";
+  public formGroup: FormGroup;
 
   public isLogin = false;
   public welcomeUsername = "";
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) {
 
     if (this.authService.isLogin()) {
@@ -36,25 +37,20 @@ export class LoginComponent implements OnInit {
       this.welcomeUsername = this.authService.getFullName();
     }
 
+    this.formGroup = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, Validators.required]
+    })
+
   }
 
   ngOnInit(): void {
   }
 
   loginUserCheck() {
-    if (this.email == "") {
-      alert("Email should not be empty");
-      return;
-    }
-    if (this.password == "") {
-      alert("Password should not be empty");
-      return;
-    }
-    let request = {
-      "email": this.email,
-      "password": this.password
-    }
-    this.authService.postRequest('/authenticate', request).subscribe((data: any) => {
+    // const email = this.formGroup.get("email");
+    // const password = this.formGroup.get("password");
+    this.authService.postRequest('/authenticate', this.formGroup.value).subscribe((data: any) => {
       if (data.hasOwnProperty(this.tokenRequestTerm)) {
         this.authService.setLoginToken(data[this.tokenRequestTerm]);
         this.authService.setLoginData(data);

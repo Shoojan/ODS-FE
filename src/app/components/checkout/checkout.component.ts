@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Card } from 'src/app/models/card';
 import { CheckoutCart } from 'src/app/models/CheckoutCart';
 import { Order } from 'src/app/models/orders';
@@ -35,10 +35,10 @@ export class CheckoutComponent implements OnInit {
     };
 
     this.formGroup = this.formBuilder.group({
-      cardName: [null],
-      cardNumber: [null],
-      cvCode: [null],
-      expirationDate: [null]
+      cardName: [null, Validators.required],
+      cardNumber: [null, Validators.required],
+      cvCode: [null, Validators.required],
+      expirationDate: [null, Validators.required]
     })
   }
 
