@@ -26,6 +26,12 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+# Features
+1.	Angular Version = 11.2.11, Node Version = 14.16.1, Port = 4200
+2.	AuthGuard has been used to control the Authentication/Authorization flow of the project, where the token and some userDetails have been stored in localstorage.
+3.	Bootstrap has been used for the UI portion. (source: https://www.bootdey.com/bootstrap-snippets/ )
+
+
 # Interface Designs
 
 *** Dashboard Layout ***
