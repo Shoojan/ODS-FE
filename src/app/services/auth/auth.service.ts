@@ -68,6 +68,14 @@ export class AuthService {
       );
   }
 
+
+  public putRequest(url: string, param: {}): Observable<any> {
+    return this.http.put(this.apiServerUrl + url, param, httpOptions)
+      .pipe(
+        catchError(this.handleError.bind(this)) // then handle the error
+      );
+  }
+
   public getAllData(url: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiServerUrl}${url}`);
   }

@@ -5,9 +5,15 @@
         <!-- <span class="profile-email">a@gmail.com</span> -->
         <form class="form-signin" [formGroup]="formGroup">
             <input type="text" formControlName="email" class="form-control" placeholder="Email" required autofocus>
-            <!-- <div *ngIf="formGroup.get('email').errors">
-                <div *ngIf="formGroup.get('email').errors.required">Email is required</div>
-            </div> -->
+            <div
+                *ngIf="formGroup.controls['email'].invalid && (formGroup.controls['email'].touched || formGroup.controls['email'].dirty)">
+                <div *ngIf="formGroup.controls['email'].errors?.required" class="text-danger">
+                    The email field is required.
+                </div>
+                <div *ngIf="formGroup.controls['email'].errors?.email" class="text-danger">
+                    The email field is invalid.
+                </div>
+            </div>
             <input type="password" formControlName="password" class="form-control" placeholder="Password" required
                 autofocus>
             <button (click)="loginUserCheck()" class="btn btn-lg btn-primary btn-block" [disabled]="formGroup.invalid"

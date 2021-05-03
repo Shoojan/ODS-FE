@@ -22,7 +22,7 @@ export class OrdersService {
   //----------------------------- Getter and Setter ----------------------------- 
 
   public getOrderCheckoutItems() {
-    return this.orderCheckoutItems.asObservable()
+    return this.orderCheckoutItems.asObservable();
   }
 
   public setOrderCheckoutItems(orders: Order[]) {
@@ -43,7 +43,7 @@ export class OrdersService {
 
   public getOrders(customerId: number): Observable<Order[]> {
     // return this.http.get<Order[]>(`${this.apiServerUrl}/orders?customerId=${customerId}`)
-    return this.authService.getAllData(`/orders?customerId=${customerId}`);
+    return this.authService.getAllData(`/orders?customerId=${customerId}&orderStatus='ADDED_TO_CART'`);
   }
 
   // public getOrder(id: number): Observable<Order> {
@@ -56,7 +56,7 @@ export class OrdersService {
 
   public updateOrders(order: Order): Observable<Order> {
     // return this.http.put<Order>(`${this.apiServerUrl}/orders`, order);
-    return this.authService.postRequest(`/orders`, order);
+    return this.authService.putRequest(`/orders`, order);
   }
 
   public deleteOrders(id: number): Observable<void> {
@@ -67,6 +67,11 @@ export class OrdersService {
   public checkoutOrders(checkoutCart: any): Observable<CheckoutCart> {
     // return this.http.post<CheckoutCart>(`${this.apiServerUrl}/orders/checkout`, checkoutCart);
     return this.authService.postRequest(`/orders/checkout`, checkoutCart);
-
   }
+
+  public fetchCheckoutItems(customerId: number): Observable<CheckoutCart[]> {
+    // return this.http.post<CheckoutCart>(`${this.apiServerUrl}/orders/checkout`, checkoutCart);
+    return this.authService.getAllData(`/orders/checkout?customerId=${customerId}`);
+  }
+
 }

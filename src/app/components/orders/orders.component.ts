@@ -22,7 +22,10 @@ export class OrdersComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getOrders(1);
+    const customerDetails = this.orderService.getCustomerDetails();
+    if (customerDetails)
+      this.getOrders(customerDetails.customerId);
+
   }
 
   public getOrders(customerId: number): void {
@@ -48,9 +51,7 @@ export class OrdersComponent implements OnInit {
 
         //update database as well
         this.orderService.updateOrders(order).subscribe((res: Order) => {
-          if (res) {
-            this.tempTotalCost = this.tempTotalCost - previousTotalCost + order.totalPrice;
-          }
+          this.tempTotalCost = this.tempTotalCost - previousTotalCost + order.totalPrice;
         });
       }
     })

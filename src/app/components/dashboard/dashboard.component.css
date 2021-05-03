@@ -9,6 +9,7 @@ body {
 
 .bg-c-blue {
     background: linear-gradient(45deg, #4099ff, #73b4ff);
+    cursor: pointer;
 }
 
 .bg-c-green {

@@ -1,43 +1,63 @@
+<hr>
+<hr>
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-blue order-card">
+        <div *ngIf="orders.length" class="col-md-4 col-xl-4">
+            <div class="card bg-c-blue order-card" (click)="goToOrders()">
                 <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                    <h4 class="m-b-20">Orders</h4>
+                    <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{orders.length}}</span></h2>
+                    <p class="m-b-0">Total Cost<span class="f-right">{{totalCost | currency:'Rs. '}}</span></p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 col-xl-3">
+        <div *ngIf="checkoutCartOrder.id" class="col-md-6 col-xl-6">
             <div class="card bg-c-green order-card">
                 <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                    <h4 class="m-b-20">Orders Checked-Out</h4>
+
+                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>
+                            {{checkoutCartOrder ? checkoutCartOrder.orders.length : 0}}</span></h2>
+
+
+                    <div class="row">
+                        <div class="col-md-4 col-xl-8"><strong>Products</strong></div>
+                        <div class="col-md-4 col-xl-4"><strong>Status</strong></div>
+                    </div>
+                    <hr>
+                    <div *ngFor="let order of checkoutCartOrder.orders">
+                        <div class="row">
+                            <div class="col-md-4 col-xl-7">{{order.product.productName}}</div>
+                            <div class="col-md-4 col-xl-1">{{order.quantity}}</div>
+                            <div class="col-md-4 col-xl-4">{{order.orderStatus}}</div>
+                        </div>
+                        <!-- <p class="m-b-0">{{order.product.productName}}<span class="f-right">{{order.quantity}}</span>
+                        </p> -->
+                    </div>
+                    <hr>
+                    <p class="m-b-0">
+                        <strong>Payment Type
+                            <span class="f-right">{{checkoutCartOrder.paymentType}}</span>
+                        </strong>
+                    </p>
+                    <p class="m-b-0">
+                        <strong>Delivery Address
+                            <span class="f-right">{{checkoutCartOrder.deliveryAddress}}</span>
+                        </strong>
+                    </p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4 col-xl-3">
-            <div class="card bg-c-yellow order-card">
-                <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
-                    <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 col-xl-3">
+        <!-- <div class="col-md-4 col-xl-4">
             <div class="card bg-c-pink order-card">
                 <div class="card-block">
-                    <h6 class="m-b-20">Orders Received</h6>
-                    <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
+                    <h4 class="m-b-20">Orders Canceled</h4>
+                    <h2 class="text-right"><i class="fa fa-frown-o f-left"></i><span>486</span></h2>
                     <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
