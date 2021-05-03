@@ -1,13 +1,13 @@
 <div class="container bootstrap snippets bootdey">
-    <h1 class="text-center login-title">Online Delivery System</h1>
     <div class="account-wall">
         <img class="profile-img" src="/assets/avatar_user.png" alt="">
         <!-- <p class="profile-name">User 123</p> -->
         <!-- <span class="profile-email">a@gmail.com</span> -->
-        <form class="form-signin">
-            <input type="text" class="form-control" placeholder="Email" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required autofocus>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">
+        <form class="form-signin" action="/orders" method="post">
+            <input type="text" [(ngModel)]="email" class="form-control" placeholder="Email" required autofocus>
+            <input type="password" [(ngModel)]="password" class="form-control" placeholder="Password" required
+                autofocus>
+            <button (click)="loginUserCheck()" class="btn btn-lg btn-primary btn-block" type="submit">
                 Sign in</button>
         </form>
     </div>

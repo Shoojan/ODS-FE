@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Order } from '../../models/orders';
 import { CheckoutCart } from 'src/app/models/CheckoutCart';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class OrdersService {
 
   public orderCheckoutItems = new BehaviorSubject<Order[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService) { }
 
   //----------------------------- Getter and Setter ----------------------------- 
 
@@ -41,7 +41,8 @@ export class OrdersService {
   //----------------------------- API Endpoints Call ----------------------------- 
 
   public getOrders(customerId: number): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.apiServerUrl}/orders?customerId=${customerId}`)
+    // return this.http.get<Order[]>(`${this.apiServerUrl}/orders?customerId=${customerId}`)
+    return this.authService.getAllData(`/orders?customerId=${customerId}`);
   }
 
   // public getOrder(id: number): Observable<Order> {
@@ -53,14 +54,18 @@ export class OrdersService {
   // }
 
   public updateOrders(order: Order): Observable<Order> {
-    return this.http.put<Order>(`${this.apiServerUrl}/orders`, order);
+    // return this.http.put<Order>(`${this.apiServerUrl}/orders`, order);
+    return this.authService.postRequest(`/orders`, order);
   }
 
   public deleteOrders(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/orders/${id}`);
+    // return this.http.delete<void>(`${this.apiServerUrl}/orders/${id}`);
+    return this.authService.deleteData(`/orders/${id}`);
   }
 
   public checkoutOrders(checkoutCart: any): Observable<CheckoutCart> {
-    return this.http.post<CheckoutCart>(`${this.apiServerUrl}/orders/checkout`, checkoutCart);
+    // return this.http.post<CheckoutCart>(`${this.apiServerUrl}/orders/checkout`, checkoutCart);
+    return this.authService.postRequest(`/orders/checkout`, checkoutCart);
+
   }
 }
