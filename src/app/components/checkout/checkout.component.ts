@@ -29,8 +29,10 @@ export class CheckoutComponent implements OnInit {
     private router: Router
   ) {
 
+    this.customerDetails = this.orderService.getCustomerDetails();
+
     this.cardDetails = {
-      cardName: "SUJAN MAHARJAN",
+      cardName: this.customerDetails.fullName,
       cardNumber: "1234 4567 8946 2355",
       cvCode: 123,
       expirationDate: "11/10"
@@ -50,8 +52,7 @@ export class CheckoutComponent implements OnInit {
         this.orders = data;
       })
     this.totalCost = this.orderService.getTotalCost();
-    this.customerDetails = this.orderService.getCustomerDetails();
-    console.log(this.customerDetails)
+
   }
 
   public populateCardDetails() {
